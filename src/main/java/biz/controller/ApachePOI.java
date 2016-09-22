@@ -2,6 +2,7 @@ package biz.controller;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 /**
  * Created by Knight_JXNU on 2016/9/22.
@@ -15,9 +16,10 @@ public class ApachePOI {
         return "hello";
     }
 
+    @ResponseBody
     @RequestMapping("/export")
-    public String export(){
-        
+    public void export(){
+
     }
 
 }
