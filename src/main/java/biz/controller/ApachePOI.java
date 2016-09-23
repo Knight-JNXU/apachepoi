@@ -17,6 +17,8 @@ public class ApachePOI {
     @Autowired
     ApachePOIServiceImpl apachePOIService;
 
+    private String fileUrl = "C:/Users/MW/Desktop/student.xlsx";
+
     @RequestMapping("/hello")
     public String hello(){
         return "hello";
@@ -25,12 +27,18 @@ public class ApachePOI {
     @ResponseBody
     @RequestMapping("/export")
     public void export() throws Exception{
-        apachePOIService.getAll();
+        apachePOIService.getAll(fileUrl);
     }
 
     @ResponseBody
-    @RequestMapping("/importExcel")
-    public void importExcel(){
+    @RequestMapping("importFromExcel")
+    public void importFromExcel() throws Exception{
+        apachePOIService.importFromExcel(fileUrl);
+    }
+
+    @ResponseBody
+    @RequestMapping("/insert")
+    public void insertStuden(){
         apachePOIService.insert();
     }
 

@@ -11,7 +11,9 @@ import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.io.FileInputStream;
 import java.io.FileOutputStream;
+import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
@@ -23,14 +25,20 @@ public class ApachePOIServiceImpl implements ApachePOIService {
     @Autowired
     ApachePOIDao apachePOIDao;
 
-    private String fileUrl = "C:/Users/MW/Desktop/student.xlsx";
-
-    public void getAll() throws Exception{
+    public void getAll(String fileUrl) throws Exception{
         List<Student> list = apachePOIDao.getAll();
         for(Student s : list){
             System.out.println(s);
         }
-        writeToExcle(list);
+        writeToExcle(list, fileUrl);
+    }
+
+    public void importFromExcel(String fileUrl) throws Exception{
+        List<Student> list = readFromExcle(fileUrl);
+        for(Student s : list){
+            System.out.println(s);
+            apachePOIDao.insert(s);
+        }
     }
 
     public void insert(){
@@ -38,7 +46,7 @@ public class ApachePOIServiceImpl implements ApachePOIService {
         apachePOIDao.insert(s);
     }
 
-    private void writeToExcle(List<Student> list) throws Exception{
+    private void writeToExcle(List<Student> list, String fileUrl) throws Exception{
         Workbook workbook = new XSSFWorkbook();
         Sheet sheet = workbook.createSheet("Students");
         Iterator<Student> iterator = list.iterator();
@@ -56,5 +64,28 @@ public class ApachePOIServiceImpl implements ApachePOIService {
         FileOutputStream fos = new FileOutputStream(fileUrl);
         workbook.write(fos);
         fos.close();
+    }
+
+    private List<Student> readFromExcle(String fileUrl) throws Exception{
+        FileInputStream fis = new FileInputStream(fileUrl);
+        Workbook workbook = new XSSFWorkbook(fis);
+        Sheet sheet = workbook.getSheetAt(0);
+        Iterator<Row> rowIterator = sheet.iterator();
+        List<Student> list = new ArrayList<Student>();
+        while (rowIterator.hasNext()){
+            Row row = rowIterator.next();
+            Iterator<Cell> cellIterator = row.cellIterator();
+            while (cellIterator.hasNext()){
+                Cell cell = cellIterator.next();
+                Student s = new Student();
+                s.setId((int)cell.getNumericCellValue());
+                cell = cellIterator.next();
+                s.setName(cell.getStringCellValue());
+                cell = cellIterator.next();
+                s.setAge((int)cell.getNumericCellValue());
+                list.add(s);
+            }
+        }
+        return list;
     }
 }
