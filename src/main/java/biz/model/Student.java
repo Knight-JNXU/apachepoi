@@ -3,12 +3,12 @@ package biz.model;
 /**
  * Created by Knight_JXNU on 2016/9/22.
  */
-public class student {
+public class Student {
     private int id;
     private String name;
     private int age;
 
-    public student(int id, String name, int age) {
+    public Student(int id, String name, int age) {
         this.id = id;
         this.name = name;
         this.age = age;
@@ -36,5 +36,14 @@ public class student {
 
     public void setId(int id) {
         this.id = id;
+    }
+
+    @Override
+    public String toString() {
+        return "Student{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", age=" + age +
+                '}';
     }
 }
