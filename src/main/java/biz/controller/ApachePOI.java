@@ -7,6 +7,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import javax.servlet.http.HttpServletRequest;
+
 /**
  * Created by Knight_JXNU on 2016/9/22.
  */
@@ -26,8 +28,9 @@ public class ApachePOI {
 
     @ResponseBody
     @RequestMapping("/export")
-    public void export() throws Exception{
-        apachePOIService.getAll(fileUrl);
+    public void export(HttpServletRequest request) throws Exception{
+        String Url = (String) request.getAttribute("filrUrl");
+        apachePOIService.getAll(Url);
     }
 
     @ResponseBody

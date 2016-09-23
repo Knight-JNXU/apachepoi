@@ -11,5 +11,9 @@
   <title>ApachePOI</title>
 </head>
 <body>
+<form action="/apachepoi/export" method="post">
+  fileUrl<input type="text" name="filrUrl">
+  <input type="submit" value="导出">
+</form>
 </body>
 </html>

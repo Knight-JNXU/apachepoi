@@ -11,6 +11,7 @@ import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.util.ArrayList;
@@ -61,7 +62,10 @@ public class ApachePOIServiceImpl implements ApachePOIService {
             Cell ageCell = row.createCell(2);
             ageCell.setCellValue(student.getAge());
         }
-        FileOutputStream fos = new FileOutputStream(fileUrl);
+        File file = new File(fileUrl);
+        file.mkdir();
+        file.createNewFile();
+        FileOutputStream fos = new FileOutputStream(file);
         workbook.write(fos);
         fos.close();
     }
