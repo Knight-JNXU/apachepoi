@@ -6,7 +6,11 @@
         id : 必须与对应接口的某个对应的方法名一致
     -->
     <select id="getAll" resultType="biz.model.Student">
-        SELECT * FROM apachepoi
+        SELECT * FROM student
     </select>
     <!-- 如果 database table 中的字段名与 resultType 类中的属性名不一致，要使用别名 -->
+
+    <insert id="insert" parameterType="biz.model.Student">
+        INSERT INTO student(name, age) VALUES (#{name}, #{age})
+    </insert>
 </mapper>

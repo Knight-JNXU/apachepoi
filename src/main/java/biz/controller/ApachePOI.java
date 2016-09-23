@@ -24,8 +24,20 @@ public class ApachePOI {
 
     @ResponseBody
     @RequestMapping("/export")
-    public void export(){
+    public void export() throws Exception{
         apachePOIService.getAll();
+    }
+
+    @ResponseBody
+    @RequestMapping("/importExcel")
+    public void importExcel(){
+        apachePOIService.insert();
+    }
+
+    @ResponseBody
+    @RequestMapping("/view")
+    public String showView() {
+        return "<!DOCTYPE html><html lang='en'><head><meta charset='UTF-8'><title>View</title></head><body><input type='button' value='test'></body></html>";
     }
 
 }
