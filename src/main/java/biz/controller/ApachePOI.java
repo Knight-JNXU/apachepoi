@@ -26,17 +26,16 @@ public class ApachePOI {
         return "hello";
     }
 
-    @ResponseBody
     @RequestMapping("/export")
-    public void export(HttpServletRequest request) throws Exception{
-        String Url = (String) request.getAttribute("filrUrl");
-        apachePOIService.getAll(Url);
+    public String export(String filrUrl1) throws Exception{
+        apachePOIService.getAll(filrUrl1);
+        return "/hello";
     }
 
-    @ResponseBody
     @RequestMapping("importFromExcel")
-    public void importFromExcel() throws Exception{
-        apachePOIService.importFromExcel(fileUrl);
+    public String importFromExcel(String fileUrl2) throws Exception{
+        apachePOIService.importFromExcel(fileUrl2);
+        return "/hello";
     }
 
     @ResponseBody

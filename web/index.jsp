@@ -11,9 +11,15 @@
   <title>ApachePOI</title>
 </head>
 <body>
-<form action="/apachepoi/export" method="post">
-  fileUrl<input type="text" name="filrUrl">
+<h4>导出</h4>
+<form action="<%=request.getContextPath()%>/apachepoi/export" method="post">
+  fileUrl:<input type="text" name="fileUrl1" value="C:\Users\MW\Desktop\newFile.xlsx" size="40">
   <input type="submit" value="导出">
+</form>
+<h4>导入</h4>
+<form action="<%=request.getContextPath()%>/apachepoi/importFromExcel" method="post">
+  fileUrl:<input type="text" name="fileUrl2" value="C:\Users\MW\Desktop\newFile.xlsx" size="40">
+  <input type="submit" value="导入">
 </form>
 </body>
 </html>

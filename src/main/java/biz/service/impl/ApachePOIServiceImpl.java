@@ -63,7 +63,6 @@ public class ApachePOIServiceImpl implements ApachePOIService {
             ageCell.setCellValue(student.getAge());
         }
         File file = new File(fileUrl);
-        file.mkdir();
         file.createNewFile();
         FileOutputStream fos = new FileOutputStream(file);
         workbook.write(fos);
